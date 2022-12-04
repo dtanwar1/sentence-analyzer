@@ -27,7 +27,6 @@ public class KMostFrequentWords implements Visitor {
     public void visit(MyArrayList  myElement) {
         try{
             Iterator<String> myListIterator = myElement.getIterator();
-
             while(myListIterator.hasNext()){
                 String[] listWords = getWordsList(myListIterator.next());
                 addToWordsDictionary(listWords);
@@ -42,6 +41,7 @@ public class KMostFrequentWords implements Visitor {
         finally{
             wordsDict.clear();
             priorityQueue.clear();
+            outpStringBuilder = null;
         }
     }
     private String[] getWordsList(String sentence){
@@ -55,11 +55,13 @@ public class KMostFrequentWords implements Visitor {
     }
 
     private void getTopKWords(){
-        outpStringBuilder.append("KMostFrequentWords  :  Count").append("\n");
-        while(priorityQueue.size() > 0 || this.topK !=0){
-            Entry<String,Integer> entry = priorityQueue.poll();
-            entry.getKey();
-            outpStringBuilder.append(entry.getKey()+"  :  "+entry.getValue()).append("\n");            
+        if(priorityQueue!=null){
+            outpStringBuilder.append("KMostFrequentWords  :  Count").append("\n");
+            while(priorityQueue.size() > 0 || this.topK !=0){
+                Entry<String,Integer> entry = priorityQueue.poll();
+                entry.getKey();
+                outpStringBuilder.append(entry.getKey()+"  :  "+entry.getValue()).append("\n");
+            }            
         }
     }
 
@@ -76,12 +78,12 @@ public class KMostFrequentWords implements Visitor {
             }        
         }
     }
-    private void addToPriorityQueue(){
-        if(priorityQueue == null){ 
-            Comparator objComparator = Entry.comparingByValue().reversed();
-            priorityQueue = new PriorityQueue<Entry<String,Integer>>(wordsDict.size(),objComparator);
-        }
+    private void addToPriorityQueue(){        
         if(wordsDict!=null && wordsDict.size() > 0){
+            if(priorityQueue == null){ 
+                Comparator objComparator = Entry.comparingByValue().reversed();
+                priorityQueue = new PriorityQueue<Entry<String,Integer>>(wordsDict.size(),objComparator);
+            }
             for (Entry<String,Integer> entry : wordsDict.entrySet()) {
                 priorityQueue.add(entry);
             }

@@ -28,6 +28,8 @@ public class Driver {
 		try {
 
 			int topK = Integer.parseInt(args[2]);
+			String outputFileKMost = args[3];
+			String outputFileSpellCheck = args[4];
 
 			MyArrayList myArrayListObj = new MyArrayList();
 
