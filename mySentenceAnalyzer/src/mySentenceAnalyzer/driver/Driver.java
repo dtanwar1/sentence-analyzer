@@ -32,6 +32,7 @@ public class Driver {
 			String outputFileSpellCheck = args[4];
 
 			MyArrayList myArrayListObj = new MyArrayList();
+			
 
 			Visitor kFrequentWordsVisitor = new KMostFrequentWords(topK);		
 			Visitor spellCheckVisitor = new SpellCheckAmerican();
