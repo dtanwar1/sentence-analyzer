@@ -57,10 +57,11 @@ public class KMostFrequentWords implements Visitor {
     private void getTopKWords(){
         if(priorityQueue!=null){
             outpStringBuilder.append("KMostFrequentWords  :  Count").append("\n");
-            while(priorityQueue.size() > 0 || this.topK !=0){
+            while(priorityQueue.size() > 0 || topK > 0){
                 Entry<String,Integer> entry = priorityQueue.poll();
                 entry.getKey();
                 outpStringBuilder.append(entry.getKey()+"  :  "+entry.getValue()).append("\n");
+                topK--;
             }            
         }
     }
