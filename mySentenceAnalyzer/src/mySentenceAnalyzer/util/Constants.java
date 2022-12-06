@@ -1,4 +1,4 @@
-package myCampusTour.util;
+package mySentenceAnalyzer.util;
 
 /**
  * This class holds constants required by other classes.
@@ -13,12 +13,8 @@ package myCampusTour.util;
 public class Constants {
     public static final String NL = "\r\n";                                         // for Windows
     // public static final String NL = "\n";                                           // for UNIX
-    public static final String durationUnit = "Minutes";
-    public static final String costUnit = "USD";
-    public static final String carbonFUnit = "Tonnes of CO2";
-    public static final String effortUnit = "Calories";
-    public static final String boldOn = "\033[0;1m";
-    public static final String boldOff = "\033[0m";
+  
+  
 
     /**
      * returns an empty string. can be accessed by all classes

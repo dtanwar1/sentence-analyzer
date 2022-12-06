@@ -1,4 +1,4 @@
-package myCampusTour.util;
+package mySentenceAnalyzer.util;
 
 /**
  * Logger class that logs everything from errors, exceptions to display

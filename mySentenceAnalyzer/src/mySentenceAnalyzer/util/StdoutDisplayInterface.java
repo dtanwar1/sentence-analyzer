@@ -1,4 +1,4 @@
-package myCampusTour.util;
+package mySentenceAnalyzer.util;
 
 /**
  * interface for displaying output to output stream. 

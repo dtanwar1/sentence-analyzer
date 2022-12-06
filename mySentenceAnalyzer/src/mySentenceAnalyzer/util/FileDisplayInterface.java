@@ -1,4 +1,4 @@
-package myCampusTour.util;
+package mySentenceAnalyzer.util;
 
 /**
  * interface for writing to files. implemented by Results class

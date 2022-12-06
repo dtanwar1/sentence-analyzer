@@ -1,9 +1,9 @@
-package myCampusTour.util;
+package mySentenceAnalyzer.util;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
-import myCampusTour.util.MyLogger.DebugLevel;
+import mySentenceAnalyzer.util.MyLogger.DebugLevel;
 
 /**
  * this class is used to display output to output stream and write 

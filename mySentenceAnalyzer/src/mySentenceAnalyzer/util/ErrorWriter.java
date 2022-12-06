@@ -1,6 +1,6 @@
-package myCampusTour.util;
+package mySentenceAnalyzer.util;
 
-import myCampusTour.util.MyLogger.DebugLevel;
+import mySentenceAnalyzer.util.MyLogger.DebugLevel;
 
 /**
  * This class handles all errors. when an exception is thrown by any 
