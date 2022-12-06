@@ -28,7 +28,7 @@ public class KMostFrequentWords implements Visitor {
         try{
             Iterator<String> myListIterator = myElement.getIterator();
             while(myListIterator.hasNext()){
-                String[] listWords = SQsATTrSe6YC(myListIterator.next());
+                String[] listWords = getWordsList(myListIterator.next());
                 addToWordsDictionary(listWords);
             }
             addToPriorityQueue();
