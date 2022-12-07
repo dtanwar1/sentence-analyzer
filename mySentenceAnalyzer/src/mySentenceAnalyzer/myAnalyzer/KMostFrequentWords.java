@@ -70,7 +70,7 @@ public class KMostFrequentWords implements Visitor {
     private void getTopKWords(){
         if(priorityQueue!=null){
             outpStringBuilder.append("KMostFrequentWords  :  Count").append("\n");
-            while(priorityQueue.size() > 0 || topK > 0){
+            while(priorityQueue.size() > 0 && topK > 0){
                 Entry<String,Integer> entry = priorityQueue.poll();
                 entry.getKey();
                 outpStringBuilder.append(entry.getKey()+"  :  "+entry.getValue()).append("\n");
@@ -82,12 +82,14 @@ public class KMostFrequentWords implements Visitor {
     private void addToWordsDictionary(String[] listWords){
         if(listWords!=null && listWords.length > 0){     
             for (String words : listWords) {
-                if(!wordsDict.containsKey(words)){
-                    wordsDict.put(words, 1);
+                if(!wordsDict.containsKey(words.toUpperCase())){
+                    wordsDict.put(words.toUpperCase(), 1);
                 }
                 else{
-                    int count =wordsDict.get(words);
-                    count = count+1;
+                    int count =wordsDict.get(words.toUpperCase());                    
+                    int newcount = count+1;
+                    wordsDict.replace(words.toUpperCase(), count, newcount);
+                    
                 } 
             }        
         }
@@ -104,6 +106,7 @@ public class KMostFrequentWords implements Visitor {
         }
     }
     private void writeOutput(){
+        System.out.println(outpStringBuilder.toString());
         FileDisplayInterface fileWrite = null;
         try{
             fileWrite = new Results();

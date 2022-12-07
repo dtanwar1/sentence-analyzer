@@ -29,7 +29,7 @@ public class MyArrayList {
             if(fileProcessor!=null){
                 String bToAString;
                 while((bToAString =fileProcessor.readLine())!=null){
-                    String[] bToAWordsArray = bToAString.split(".");
+                   bToAString.replaceAll(".", " ");
                     sentence.add(bToAString);
                 }
                 
