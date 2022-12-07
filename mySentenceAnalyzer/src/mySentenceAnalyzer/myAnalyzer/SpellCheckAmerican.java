@@ -8,16 +8,27 @@ import mySentenceAnalyzer.util.FileProcessor;
 public class SpellCheckAmerican implements Visitor {
     private  static String whiteSpaceCharacter = " ";
     private  HashMap<String,String> wordsLookUp;
-    private String lookUpFileName;
+    
+    private String inputFileName;
+    private String outputFileName;
+    private String bToAFileName;
+    private StrategyI strategyImpl;
 
-    public SpellCheckAmerican(String fileName){
-        lookUpFileName = fileName;
+    public SpellCheckAmerican(String inputFileNameIn,
+                              String bToAFileNameIn,
+                              String outputFileNameIn,
+                              StrategyI strategyImplIn){
+        inputFileName = inputFileNameIn;
         wordsLookUp = new HashMap<String,String>();
+        bToAFileName = bToAFileNameIn;
+        strategyImpl = strategyImplIn;
+        outputFileName = outputFileNameIn;
     }
 
     @Override
     public void visit(MyArrayList myElement) {
         try {
+            myElement.ReadFile(inputFileName);
             Iterator<String> myListIterator = myElement.getIterator();
             if(myListIterator!=null){
                 getBritishToAmericanLookUp();
@@ -43,6 +54,8 @@ public class SpellCheckAmerican implements Visitor {
         
         
     }
+
+    
 
     private String[] getWordsList(String sentence){
         String[] listWords= null;
