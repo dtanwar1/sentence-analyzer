@@ -26,16 +26,15 @@ public class Driver {
 		}
 
 		try {
-
+			String inputFileScentences = args[0];
+			String outputFileBToA = args[1];
 			int topK = Integer.parseInt(args[2]);
 			String outputFileKMost = args[3];
 			String outputFileSpellCheck = args[4];
 
-			MyArrayList myArrayListObj = new MyArrayList();
-			
-
+			MyArrayList myArrayListObj = new MyArrayList();			
 			Visitor kFrequentWordsVisitor = new KMostFrequentWords(topK);		
-			Visitor spellCheckVisitor = new SpellCheckAmerican();
+			Visitor spellCheckVisitor = new SpellCheckAmerican(outputFileBToA);
 
 			myArrayListObj.accept(kFrequentWordsVisitor);
 			myArrayListObj.accept(spellCheckVisitor);
