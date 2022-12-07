@@ -1,8 +1,11 @@
 package mySentenceAnalyzer.driver;
 
+import mySentenceAnalyzer.myAnalyzer.CaseInsensetiveStrategy;
+import mySentenceAnalyzer.myAnalyzer.CaseSensitiveStrategy;
 import mySentenceAnalyzer.myAnalyzer.KMostFrequentWords;
 import mySentenceAnalyzer.myAnalyzer.MyArrayList;
 import mySentenceAnalyzer.myAnalyzer.SpellCheckAmerican;
+import mySentenceAnalyzer.myAnalyzer.StrategyI;
 import mySentenceAnalyzer.myAnalyzer.Visitor;
 
 /**
@@ -27,14 +30,19 @@ public class Driver {
 
 		try {
 			String inputFileScentences = args[0];
-			String outputFileBToA = args[1];
+			String inputFileBToA = args[1];
 			int topK = Integer.parseInt(args[2]);
 			String outputFileKMost = args[3];
 			String outputFileSpellCheck = args[4];
 
-			MyArrayList myArrayListObj = new MyArrayList();			
-			Visitor kFrequentWordsVisitor = new KMostFrequentWords(topK);		
-			Visitor spellCheckVisitor = new SpellCheckAmerican(outputFileBToA);
+			MyArrayList myArrayListObj = new MyArrayList();	
+			
+			Visitor kFrequentWordsVisitor = new KMostFrequentWords(topK,inputFileScentences,outputFileKMost);
+			
+			StrategyI caseSenStrategy = new CaseSensitiveStrategy();
+			StrategyI caseInSenStrategy = new CaseInsensetiveStrategy();
+			
+			Visitor spellCheckVisitor = new SpellCheckAmerican(inputFileScentences,inputFileBToA,outputFileSpellCheck,caseSenStrategy);
 
 			myArrayListObj.accept(kFrequentWordsVisitor);
 			myArrayListObj.accept(spellCheckVisitor);

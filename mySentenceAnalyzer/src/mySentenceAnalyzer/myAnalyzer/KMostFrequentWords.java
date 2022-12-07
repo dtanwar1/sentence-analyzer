@@ -11,21 +11,31 @@ import java.util.Map.Entry;
 public class KMostFrequentWords implements Visitor {
 
     private int topK;
+    private String inputFileName;
+    private String outputFileName;
     private  static String whiteSpaceCharacter = " ";
     private HashMap<String,Integer> wordsDict;
     private PriorityQueue<Entry<String,Integer>> priorityQueue;
     private StringBuilder outpStringBuilder;
     
+    
 
-    public KMostFrequentWords(int topKin){
+    public KMostFrequentWords(int topKin,
+                            String inputFileNameIn,
+                            String outputFileNameIn){
         topK = topKin;
+        inputFileName = inputFileNameIn;
+        outputFileName = outputFileNameIn;
+        
         wordsDict = new HashMap<String,Integer>();
         outpStringBuilder = new StringBuilder();
+        
     }
 
     @Override
     public void visit(MyArrayList  myElement) {
         try{
+            myElement.ReadFile(inputFileName);
             Iterator<String> myListIterator = myElement.getIterator();
             while(myListIterator.hasNext()){
                 String[] listWords = getWordsList(myListIterator.next());

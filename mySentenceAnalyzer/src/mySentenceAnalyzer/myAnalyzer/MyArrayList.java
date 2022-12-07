@@ -22,9 +22,8 @@ public class MyArrayList {
         visitor.visit(this);
     }
 
-    public void ReadFile(){
+    public void ReadFile(String fileName){
         FileProcessor fileProcessor = null;
-        String fileName = "";
         try {
             fileProcessor = new FileProcessor(fileName);
             if(fileProcessor!=null){
