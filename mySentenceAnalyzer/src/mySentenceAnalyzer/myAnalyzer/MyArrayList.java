@@ -29,8 +29,8 @@ public class MyArrayList {
             if(fileProcessor!=null){
                 String bToAString;
                 while((bToAString =fileProcessor.readLine())!=null){
-                   bToAString.replaceAll(".", " ");
-                    sentence.add(bToAString);
+                   String replacedBtoA = bToAString.replace(".", " ");
+                    sentence.add(replacedBtoA);
                 }
                 
             }           
