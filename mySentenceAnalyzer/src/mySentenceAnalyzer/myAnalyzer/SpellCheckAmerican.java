@@ -3,7 +3,9 @@ package mySentenceAnalyzer.myAnalyzer;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import mySentenceAnalyzer.util.FileDisplayInterface;
 import mySentenceAnalyzer.util.FileProcessor;
+import mySentenceAnalyzer.util.Results;
 
 public class SpellCheckAmerican implements Visitor {
     private  static String whiteSpaceCharacter = " ";
@@ -35,10 +37,8 @@ public class SpellCheckAmerican implements Visitor {
                 if(wordsLookUp!=null && wordsLookUp.size()>0){
 
                     while(myListIterator.hasNext()){
-
                         String[] listWords = getWordsList(myListIterator.next());
-
-                    
+                        strategyImpl.replaceWords(listWords,wordsLookUp);                    
                     }
                 }
             }
@@ -70,7 +70,7 @@ public class SpellCheckAmerican implements Visitor {
     private void getBritishToAmericanLookUp(){
         FileProcessor fileProcessor = null;
         try {
-            fileProcessor = new FileProcessor(lookUpFileName);
+            fileProcessor = new FileProcessor(bToAFileName);
             if(fileProcessor!=null){
                 String bToAString;
                 while((bToAString =fileProcessor.readLine())!=null){
@@ -86,7 +86,20 @@ public class SpellCheckAmerican implements Visitor {
         finally{
             if(fileProcessor!=null)
                 fileProcessor.close();
-        }               
+        } 
+                      
+    }
+
+    private void writeOutput(){
+        FileDisplayInterface fileWrite = null;
+        try{
+            fileWrite = new Results();
+            fileWrite.writeResults("", outputFileName);
+        }
+        catch(Exception ex){
+
+        }
+
     }
 
 

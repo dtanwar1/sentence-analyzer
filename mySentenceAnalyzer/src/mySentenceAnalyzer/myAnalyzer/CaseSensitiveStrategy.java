@@ -1,11 +1,24 @@
 package mySentenceAnalyzer.myAnalyzer;
 
+import java.util.HashMap;
+
 public class CaseSensitiveStrategy implements StrategyI {
 
+  
+
     @Override
-    public void replaceWords() {
-        // TODO Auto-generated method stub
+    public void replaceWords(String[] listWords, HashMap<String, String> wordsLookUp) {
         
+        if(listWords!=null && listWords.length >0
+            && wordsLookUp!=null && wordsLookUp.size()>0){
+
+                for (int i=0; i<= listWords.length -1;i++) {
+
+                    if(wordsLookUp.containsKey(listWords[i])){
+                        listWords[i] = wordsLookUp.get(listWords[i]);
+                    }                    
+                }
+        }        
     }
     
 }

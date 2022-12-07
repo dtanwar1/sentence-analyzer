@@ -6,6 +6,9 @@ import java.util.Iterator;
 import java.util.PriorityQueue;
 import java.util.Map.Entry;
 
+import mySentenceAnalyzer.util.FileDisplayInterface;
+import mySentenceAnalyzer.util.Results;
+
 
 
 public class KMostFrequentWords implements Visitor {
@@ -101,6 +104,14 @@ public class KMostFrequentWords implements Visitor {
         }
     }
     private void writeOutput(){
+        FileDisplayInterface fileWrite = null;
+        try{
+            fileWrite = new Results();
+            fileWrite.writeResults(outpStringBuilder.toString(), outputFileName);
+        }
+        catch(Exception ex){
+
+        }
 
     }
 

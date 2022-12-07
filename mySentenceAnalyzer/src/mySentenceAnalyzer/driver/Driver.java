@@ -38,14 +38,18 @@ public class Driver {
 			MyArrayList myArrayListObj = new MyArrayList();	
 			
 			Visitor kFrequentWordsVisitor = new KMostFrequentWords(topK,inputFileScentences,outputFileKMost);
+			myArrayListObj.accept(kFrequentWordsVisitor);
 			
 			StrategyI caseSenStrategy = new CaseSensitiveStrategy();
 			StrategyI caseInSenStrategy = new CaseInsensetiveStrategy();
 			
-			Visitor spellCheckVisitor = new SpellCheckAmerican(inputFileScentences,inputFileBToA,outputFileSpellCheck,caseSenStrategy);
+			Visitor spellCheckSenVisitor = new SpellCheckAmerican(inputFileScentences,inputFileBToA,outputFileSpellCheck,caseSenStrategy);			
+			myArrayListObj.accept(spellCheckSenVisitor);
 
-			myArrayListObj.accept(kFrequentWordsVisitor);
-			myArrayListObj.accept(spellCheckVisitor);
+			Visitor spellCheckInsenVisitor = new SpellCheckAmerican(inputFileScentences,inputFileBToA,outputFileSpellCheck,caseInSenStrategy);			
+			myArrayListObj.accept(spellCheckInsenVisitor);
+
+
 			
 		} catch (Exception e) {
 			
