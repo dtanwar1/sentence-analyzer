@@ -21,19 +21,26 @@ public class Driver {
 		 * build.xml. To avoid that, below condition is used
 		 */
 
-		if (args.length != 5 || args[0].equals("${arg0}") || args[1].equals("${arg1}") || args[2].equals("${arg2}")
-			|| args[3].equals("${arg3}") || args[4].equals("${arg4}")) {
+		// if (args.length != 5 || args[0].equals("${arg0}") || args[1].equals("${arg1}") || args[2].equals("${arg2}")
+		// 	|| args[3].equals("${arg3}") || args[4].equals("${arg4}")) {
 
-				System.err.println("Error: Incorrect number of arguments. Program accepts 5 argumnets.");
-				System.exit(0);
-		}
+		// 		System.err.println("Error: Incorrect number of arguments. Program accepts 5 argumnets.");
+		// 		System.exit(0);
+		// }
 
 		try {
-			String inputFileScentences = args[0];
-			String inputFileBToA = args[1];
-			int topK = Integer.parseInt(args[2]);
-			String outputFileKMost = args[3];
-			String outputFileSpellCheck = args[4];
+			// String inputFileScentences = args[0];
+			// String inputFileBToA = args[1];
+			// int topK = Integer.parseInt(args[2]);
+			// String outputFileKMost = args[3];
+			// String outputFileSpellCheck = args[4];
+
+
+			String inputFileScentences = "mySentenceAnalyzer/Input.txt";
+			String inputFileBToA = "";
+			int topK = 5;
+			String outputFileKMost = "";
+			String outputFileSpellCheck = "";
 
 			MyArrayList myArrayListObj = new MyArrayList();	
 			
@@ -43,11 +50,13 @@ public class Driver {
 			StrategyI caseSenStrategy = new CaseSensitiveStrategy();
 			StrategyI caseInSenStrategy = new CaseInsensetiveStrategy();
 			
-			Visitor spellCheckSenVisitor = new SpellCheckAmerican(inputFileScentences,inputFileBToA,outputFileSpellCheck,caseSenStrategy);			
-			myArrayListObj.accept(spellCheckSenVisitor);
+			Visitor spellCheckVisitor = new SpellCheckAmerican(inputFileScentences,inputFileBToA,outputFileSpellCheck);	
 
-			Visitor spellCheckInsenVisitor = new SpellCheckAmerican(inputFileScentences,inputFileBToA,outputFileSpellCheck,caseInSenStrategy);			
-			myArrayListObj.accept(spellCheckInsenVisitor);
+			spellCheckVisitor.setStrategy(caseInSenStrategy);
+			myArrayListObj.accept(spellCheckVisitor);
+			
+			spellCheckVisitor.setStrategy(caseSenStrategy);
+			myArrayListObj.accept(spellCheckVisitor);
 
 
 			

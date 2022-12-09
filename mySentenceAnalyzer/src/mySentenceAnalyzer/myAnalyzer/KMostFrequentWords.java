@@ -20,6 +20,7 @@ public class KMostFrequentWords implements Visitor {
     private HashMap<String,Integer> wordsDict;
     private PriorityQueue<Entry<String,Integer>> priorityQueue;
     private StringBuilder outpStringBuilder;
+    private StrategyI strategyImpl;
     
     
 
@@ -116,6 +117,11 @@ public class KMostFrequentWords implements Visitor {
 
         }
 
+    }
+
+    @Override
+    public void setStrategy(StrategyI strategyIn) {
+        strategyImpl = strategyIn;           
     }
 
     

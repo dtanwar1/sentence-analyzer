@@ -5,7 +5,8 @@ import java.util.HashMap;
 public class CaseInsensetiveStrategy implements StrategyI {
 
     @Override
-    public void replaceWords(String[] listWords, HashMap<String, String> wordsLookUp) {
+    public String replaceWords(String[] listWords, HashMap<String, String> wordsLookUp) {
+        String sentence= "";
         HashMap<String, String> wordslookup = new HashMap<String, String>();
         for(String s : wordsLookUp.keySet()){
             wordslookup.put(s.toLowerCase(), wordsLookUp.get(s).toLowerCase());
@@ -17,6 +18,8 @@ public class CaseInsensetiveStrategy implements StrategyI {
                     listWords[i] = wordslookup.get(word);
                 }
             }
+            sentence = String.join(" ", listWords);
         }    
+        return sentence;
     }
 }

@@ -3,6 +3,7 @@ package mySentenceAnalyzer.myAnalyzer;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import mySentenceAnalyzer.util.Constants;
 import mySentenceAnalyzer.util.FileDisplayInterface;
 import mySentenceAnalyzer.util.FileProcessor;
 import mySentenceAnalyzer.util.Results;
@@ -15,47 +16,50 @@ public class SpellCheckAmerican implements Visitor {
     private String outputFileName;
     private String bToAFileName;
     private StrategyI strategyImpl;
+    private StringBuilder outpBuilder;
 
     public SpellCheckAmerican(String inputFileNameIn,
                               String bToAFileNameIn,
-                              String outputFileNameIn,
-                              StrategyI strategyImplIn){
+                              String outputFileNameIn){
         inputFileName = inputFileNameIn;
         wordsLookUp = new HashMap<String,String>();
         bToAFileName = bToAFileNameIn;
-        strategyImpl = strategyImplIn;
         outputFileName = outputFileNameIn;
+        outpBuilder = new StringBuilder();
     }
 
     @Override
     public void visit(MyArrayList myElement) {
         try {
-            myElement.ReadFile(inputFileName);
+            myElement.ReadFile(inputFileName);                    
             Iterator<String> myListIterator = myElement.getIterator();
-            if(myListIterator!=null){
-                getBritishToAmericanLookUp();
-                if(wordsLookUp!=null && wordsLookUp.size()>0){
 
-                    while(myListIterator.hasNext()){
-                        String[] listWords = getWordsList(myListIterator.next());
-                        strategyImpl.replaceWords(listWords,wordsLookUp);                    
-                    }
-                }
-            }
+            ConvertFromBritishToAmerican(myListIterator,strategyImpl);
+            
         } catch (Exception e) {
             
         }
         finally{
             wordsLookUp.clear();
-        }
-       
-
-       
-        
-        
+        }                          
     }
 
     
+
+    private void ConvertFromBritishToAmerican(Iterator<String> myListIterator, StrategyI strategyImpl) {
+        if(myListIterator!=null){
+            getBritishToAmericanLookUp();
+            if(wordsLookUp!=null && wordsLookUp.size()>0){
+                outpBuilder.append(Constants.NL);
+                while(myListIterator.hasNext()){
+                    String[] listWords = getWordsList(myListIterator.next());
+                    String replacedSentence = strategyImpl.replaceWords(listWords,wordsLookUp);     
+                    outpBuilder.append(replacedSentence).append(Constants.NL);
+                }
+                writeOutput();
+            }
+        }
+    }
 
     private String[] getWordsList(String sentence){
         String[] listWords= null;
@@ -94,12 +98,16 @@ public class SpellCheckAmerican implements Visitor {
         FileDisplayInterface fileWrite = null;
         try{
             fileWrite = new Results();
-            fileWrite.writeResults("", outputFileName);
+            fileWrite.writeResults(outpBuilder.toString(), outputFileName);
         }
         catch(Exception ex){
 
         }
 
+    }
+    @Override
+    public void setStrategy(StrategyI strategyIn) {
+        strategyImpl = strategyIn;           
     }
 
 

@@ -7,8 +7,8 @@ public class CaseSensitiveStrategy implements StrategyI {
   
 
     @Override
-    public void replaceWords(String[] listWords, HashMap<String, String> wordsLookUp) {
-        
+    public String replaceWords(String[] listWords, HashMap<String, String> wordsLookUp) {
+        String sentence="";
         if(listWords!=null && listWords.length >0
             && wordsLookUp!=null && wordsLookUp.size()>0){
 
@@ -18,7 +18,10 @@ public class CaseSensitiveStrategy implements StrategyI {
                         listWords[i] = wordsLookUp.get(listWords[i]);
                     }                    
                 }
+
+                sentence = String.join(" ", listWords);
         }        
+        return sentence;
     }
     
 }
