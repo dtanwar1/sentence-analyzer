@@ -21,6 +21,9 @@ public class MyArrayList {
     public void accept(Visitor visitor){
         visitor.visit(this);
     }
+    public void clear(){
+        sentence.clear();
+    }
 
     public void ReadFile(String fileName){
         FileProcessor fileProcessor = null;

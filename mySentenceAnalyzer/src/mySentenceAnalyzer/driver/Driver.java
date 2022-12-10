@@ -37,10 +37,10 @@ public class Driver {
 
 
 			String inputFileScentences = "mySentenceAnalyzer/Input.txt";
-			String inputFileBToA = "";
+			String inputFileBToA = "mySentenceAnalyzer/btoA.txt";
 			int topK = 5;
-			String outputFileKMost = "";
-			String outputFileSpellCheck = "";
+			String outputFileKMost = "mySentenceAnalyzer/kMostOutput.txt";
+			String outputFileSpellCheck = "mySentenceAnalyzer/SpellAmerOutput.txt";
 
 			MyArrayList myArrayListObj = new MyArrayList();	
 			

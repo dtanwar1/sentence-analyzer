@@ -55,6 +55,7 @@ public class KMostFrequentWords implements Visitor {
         finally{
             wordsDict.clear();
             priorityQueue.clear();
+            myElement.clear();
             outpStringBuilder = null;
         }
     }

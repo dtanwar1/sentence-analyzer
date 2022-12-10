@@ -33,7 +33,7 @@ public class SpellCheckAmerican implements Visitor {
         try {
             myElement.ReadFile(inputFileName);                    
             Iterator<String> myListIterator = myElement.getIterator();
-
+            getBritishToAmericanLookUp();
             ConvertFromBritishToAmerican(myListIterator,strategyImpl);
             
         } catch (Exception e) {
@@ -41,6 +41,7 @@ public class SpellCheckAmerican implements Visitor {
         }
         finally{
             wordsLookUp.clear();
+            myElement.clear();
         }                          
     }
 
@@ -48,13 +49,15 @@ public class SpellCheckAmerican implements Visitor {
 
     private void ConvertFromBritishToAmerican(Iterator<String> myListIterator, StrategyI strategyImpl) {
         if(myListIterator!=null){
-            getBritishToAmericanLookUp();
+            
+
             if(wordsLookUp!=null && wordsLookUp.size()>0){
                 outpBuilder.append(Constants.NL);
                 while(myListIterator.hasNext()){
+
                     String[] listWords = getWordsList(myListIterator.next());
                     String replacedSentence = strategyImpl.replaceWords(listWords,wordsLookUp);     
-                    outpBuilder.append(replacedSentence).append(Constants.NL);
+                    outpBuilder.append(replacedSentence).append(".").append(Constants.NL);                
                 }
                 writeOutput();
             }
