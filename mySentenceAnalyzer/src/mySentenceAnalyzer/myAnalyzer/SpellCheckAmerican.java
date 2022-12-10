@@ -84,7 +84,8 @@ public class SpellCheckAmerican implements Visitor {
                 String bToAString;
                 while((bToAString =fileProcessor.readLine())!=null){
                     String[] bToAWordsArray = bToAString.split(":");
-                    wordsLookUp.put(bToAWordsArray[0], bToAWordsArray[1]);
+                    String replacedBtoA = bToAWordsArray[1].replace(".", " ");
+                    wordsLookUp.put(bToAWordsArray[0], replacedBtoA);
 
                 }
                 
