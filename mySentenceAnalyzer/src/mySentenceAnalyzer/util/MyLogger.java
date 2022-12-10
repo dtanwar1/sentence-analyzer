@@ -75,7 +75,7 @@ public class MyLogger{
     public static void writeError (String     message  ,
                                      DebugLevel levelIn ) {
 	if (debugLevel.compareTo(levelIn)>=0 || levelIn.ordinal() >0)
-	    System.err.println(message);
+	    System.err.println("Custom Error message:    "+message);
     }
 
     /**
