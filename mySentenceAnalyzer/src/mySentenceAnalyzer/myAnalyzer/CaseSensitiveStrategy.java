@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class CaseSensitiveStrategy implements StrategyI {
 
-  
+   private String nameString = "CaseSensitiveStrategy";
 
     @Override
     public String replaceWords(String[] listWords, HashMap<String, String> wordsLookUp) {
@@ -22,6 +22,12 @@ public class CaseSensitiveStrategy implements StrategyI {
                 sentence = String.join(" ", listWords);
         }        
         return sentence;
+    }
+
+    @Override
+    public String getName() {
+        
+        return nameString;
     }
     
 }
