@@ -54,7 +54,7 @@ public class SpellCheckAmerican implements Visitor {
             
 
             if(wordsLookUp!=null && wordsLookUp.size()>0){
-                outpBuilder.append(strategyImpl.getName()).append(Constants.NL);
+                outpBuilder.append(strategyImpl.getName() + ":").append(Constants.NL).append(Constants.NL);
                 while(myListIterator.hasNext()){
 
                     String[] listWords = getWordsList(myListIterator.next());
