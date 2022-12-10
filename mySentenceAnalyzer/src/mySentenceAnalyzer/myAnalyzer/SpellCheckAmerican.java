@@ -6,7 +6,9 @@ import java.util.Iterator;
 import mySentenceAnalyzer.util.Constants;
 import mySentenceAnalyzer.util.FileDisplayInterface;
 import mySentenceAnalyzer.util.FileProcessor;
+import mySentenceAnalyzer.util.MyLogger;
 import mySentenceAnalyzer.util.Results;
+import mySentenceAnalyzer.util.MyLogger.DebugLevel;
 
 public class SpellCheckAmerican implements Visitor {
     private  static String whiteSpaceCharacter = " ";
@@ -36,8 +38,8 @@ public class SpellCheckAmerican implements Visitor {
             getBritishToAmericanLookUp();
             ConvertFromBritishToAmerican(myListIterator,strategyImpl);
             
-        } catch (Exception e) {
-            
+        } catch (Exception ex) {
+            MyLogger.writeError(ex.toString(),DebugLevel.SPELL_CHECK_AMERICAN );   
         }
         finally{
             wordsLookUp.clear();
@@ -68,8 +70,8 @@ public class SpellCheckAmerican implements Visitor {
         String[] listWords= null;
         try {
             listWords = sentence.split(whiteSpaceCharacter);
-        } catch (Exception e) {
-            
+        } catch (Exception ex) {
+            MyLogger.writeError(ex.toString(),DebugLevel.SPELL_CHECK_AMERICAN );   
         }
         return listWords;
     }
@@ -87,8 +89,8 @@ public class SpellCheckAmerican implements Visitor {
                 }
                 
             }           
-        } catch (Exception e) {
-            
+        } catch (Exception ex) {
+            MyLogger.writeError(ex.toString(),DebugLevel.SPELL_CHECK_AMERICAN );   
         }
         finally{
             if(fileProcessor!=null)
@@ -104,7 +106,7 @@ public class SpellCheckAmerican implements Visitor {
             fileWrite.writeResults(outpBuilder.toString(), outputFileName);
         }
         catch(Exception ex){
-
+            MyLogger.writeError(ex.toString(),DebugLevel.SPELL_CHECK_AMERICAN ); 
         }
 
     }

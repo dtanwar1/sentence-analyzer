@@ -1,5 +1,7 @@
 package mySentenceAnalyzer.util;
 
+
+
 /**
  * Logger class that logs everything from errors, exceptions to display
  * output with the help of debug level enum
@@ -12,11 +14,18 @@ public class MyLogger{
         NONE, 
         DRIVER,
         FILE_PROCESSOR,
-        RESULTS;
+        RESULTS,
+        SPELL_CHECK_AMERICAN,
+        K_MOST_FREQUENT_WORDS,
+        MY_ARRAYLIST;
+        
     }
 
     private static DebugLevel debugLevel;
 
+    public static DebugLevel getDebugLevel(){
+        return debugLevel;
+    }
     /**
      * sets the debug level to levelIn int
      * 
@@ -27,6 +36,9 @@ public class MyLogger{
             case 1: debugLevel = DebugLevel.RESULTS; break;
             case 2: debugLevel = DebugLevel.FILE_PROCESSOR; break;
             case 3: debugLevel = DebugLevel.DRIVER; break;
+            case 4: debugLevel = DebugLevel.SPELL_CHECK_AMERICAN; break;
+            case 5: debugLevel = DebugLevel.K_MOST_FREQUENT_WORDS; break;
+            case 6: debugLevel = DebugLevel.MY_ARRAYLIST; break;
             default: debugLevel = DebugLevel.NONE; break;
         }
     }
@@ -62,8 +74,8 @@ public class MyLogger{
      */
     public static void writeError (String     message  ,
                                      DebugLevel levelIn ) {
-	if (debugLevel.compareTo(levelIn)>=0)
-	    System.err.println(debugLevel+": "+Constants.NL+message);
+	if (debugLevel.compareTo(levelIn)>=0 || levelIn.ordinal() >0)
+	    System.err.println(message);
     }
 
     /**

@@ -13,9 +13,8 @@ public class FileProcessor {
         try {
             fileReader = new FileReader(fileName);
             reader = new BufferedReader(fileReader);                
-        } catch (Exception ex) {     
-            System.err.println("File Not found at File Processor");        
-            throw ex;     
+        } catch (Exception ex) {          
+            throw new Exception("File Not found at File Processor");     
         }
 
     }

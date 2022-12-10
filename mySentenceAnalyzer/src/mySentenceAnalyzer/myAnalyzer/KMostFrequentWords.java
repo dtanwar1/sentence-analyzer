@@ -7,7 +7,9 @@ import java.util.PriorityQueue;
 import java.util.Map.Entry;
 
 import mySentenceAnalyzer.util.FileDisplayInterface;
+import mySentenceAnalyzer.util.MyLogger;
 import mySentenceAnalyzer.util.Results;
+import mySentenceAnalyzer.util.MyLogger.DebugLevel;
 
 
 
@@ -26,8 +28,14 @@ public class KMostFrequentWords implements Visitor {
 
     public KMostFrequentWords(int topKin,
                             String inputFileNameIn,
-                            String outputFileNameIn){
-        topK = topKin;
+                            String outputFileNameIn) throws Exception{
+        if(topKin > 0){                                
+            topK = topKin;
+        }
+        else{
+            throw new Exception("Invalid value of K provided");
+        }
+
         inputFileName = inputFileNameIn;
         outputFileName = outputFileNameIn;
         
@@ -50,7 +58,7 @@ public class KMostFrequentWords implements Visitor {
             writeOutput();
         }
         catch(Exception ex){
-
+            MyLogger.writeError(ex.toString(),DebugLevel.K_MOST_FREQUENT_WORDS );                 
         }    
         finally{
             wordsDict.clear();
@@ -63,8 +71,8 @@ public class KMostFrequentWords implements Visitor {
         String[] listWords= null;
         try {
             listWords = sentence.split(whiteSpaceCharacter);
-        } catch (Exception e) {
-            
+        } catch (Exception ex) {
+            MyLogger.writeError(ex.toString(),DebugLevel.K_MOST_FREQUENT_WORDS );   
         }
         return listWords;
     }
@@ -108,14 +116,13 @@ public class KMostFrequentWords implements Visitor {
         }
     }
     private void writeOutput(){
-        System.out.println(outpStringBuilder.toString());
         FileDisplayInterface fileWrite = null;
         try{
             fileWrite = new Results();
             fileWrite.writeResults(outpStringBuilder.toString(), outputFileName);
         }
         catch(Exception ex){
-
+            MyLogger.writeError(ex.toString(),DebugLevel.K_MOST_FREQUENT_WORDS );   
         }
 
     }

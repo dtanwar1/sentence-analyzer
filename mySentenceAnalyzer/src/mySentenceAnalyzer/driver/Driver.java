@@ -7,6 +7,8 @@ import mySentenceAnalyzer.myAnalyzer.MyArrayList;
 import mySentenceAnalyzer.myAnalyzer.SpellCheckAmerican;
 import mySentenceAnalyzer.myAnalyzer.StrategyI;
 import mySentenceAnalyzer.myAnalyzer.Visitor;
+import mySentenceAnalyzer.util.MyLogger;
+import mySentenceAnalyzer.util.MyLogger.DebugLevel;
 
 /**
  * @author placeholder
@@ -21,27 +23,26 @@ public class Driver {
 		 * build.xml. To avoid that, below condition is used
 		 */
 
-		// if (args.length != 5 || args[0].equals("${arg0}") || args[1].equals("${arg1}") || args[2].equals("${arg2}")
-		// 	|| args[3].equals("${arg3}") || args[4].equals("${arg4}")) {
+		if (args.length != 5 || args[0].equals("${arg0}") || args[1].equals("${arg1}") || args[2].equals("${arg2}")
+			|| args[3].equals("${arg3}") || args[4].equals("${arg4}") || args[5].equals("${arg5}")) {
 
-		// 		System.err.println("Error: Incorrect number of arguments. Program accepts 5 argumnets.");
-		// 		System.exit(0);
-		// }
+				System.err.println("Error: Incorrect number of arguments. Program accepts 6 argumnets.");
+				System.exit(0);
+		}
+	
 
 		try {
-			// String inputFileScentences = args[0];
-			// String inputFileBToA = args[1];
-			// int topK = Integer.parseInt(args[2]);
-			// String outputFileKMost = args[3];
-			// String outputFileSpellCheck = args[4];
+								
+				
+			int loglevel = Integer.parseInt(args[5]);
+			MyLogger.setDebugValue(loglevel);	
 
-
-			String inputFileScentences = "mySentenceAnalyzer/Input.txt";
-			String inputFileBToA = "mySentenceAnalyzer/btoA.txt";
-			int topK = 5;
-			String outputFileKMost = "mySentenceAnalyzer/kMostOutput.txt";
-			String outputFileSpellCheck = "mySentenceAnalyzer/SpellAmerOutput.txt";
-
+			String inputFileScentences = args[0];
+			String inputFileBToA = args[1];
+			int topK = Integer.parseInt(args[2]);
+			String outputFileKMost = args[3];
+			String outputFileSpellCheck = args[4];
+									
 			MyArrayList myArrayListObj = new MyArrayList();	
 			
 			Visitor kFrequentWordsVisitor = new KMostFrequentWords(topK,inputFileScentences,outputFileKMost);
@@ -60,8 +61,10 @@ public class Driver {
 
 
 			
-		} catch (Exception e) {
-			
+		} catch (Exception ex) {
+			if(MyLogger.getDebugLevel() == null) MyLogger.setDebugValue(1);		
+			MyLogger.writeError(ex.toString(),DebugLevel.DRIVER ); 
+			System.exit(0);
 		}
 		
 		

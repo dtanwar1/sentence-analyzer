@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import mySentenceAnalyzer.util.FileProcessor;
+import mySentenceAnalyzer.util.MyLogger;
+import mySentenceAnalyzer.util.MyLogger.DebugLevel;
 
 public class MyArrayList {
 
@@ -25,7 +27,7 @@ public class MyArrayList {
         sentence.clear();
     }
 
-    public void ReadFile(String fileName){
+    public void ReadFile(String fileName) throws Exception{
         FileProcessor fileProcessor = null;
         try {
             fileProcessor = new FileProcessor(fileName);
@@ -37,8 +39,9 @@ public class MyArrayList {
                 }
                 
             }           
-        } catch (Exception e) {
-            
+        } catch (Exception ex) {
+            MyLogger.writeError(ex.toString(),DebugLevel.MY_ARRAYLIST );
+            System.exit(0);     
         }
         finally{
             if(fileProcessor!=null)
